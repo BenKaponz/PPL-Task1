@@ -1,16 +1,37 @@
-#lang racket/base
-
+#lang racket
+;; Signature: last-item(lst)
+;; Type: List(T) -> Number
+;; Purpose: Find the last element in the list
+;; Pre-conditions: (eq? lst '()) -> #f
+;; Tests: (last-item( '(1 4 9) ) ) -> 9
 (define last-item
     (lambda (lst)
-    @todo
-))
+    ( if(eq? (cdr lst) '())
+        (car lst)
+        (last-item(cdr lst))
+)))
 
+;; Signature: remove-last-item(lst)
+;; Type: List(T) -> List(T)
+;; Purpose: remove the last element of the list 
+;; Pre-conditions: (eq? lst '()) -> #f
+;; Tests: (last-item( '(1 4 9) ) ) -> '(1 4)
 (define remove-last-item
     (lambda (lst)
-    @todo
-))
+      (if(eq? (cdr lst) '()) 
+        '() 
+        (cons (car lst) (remove-last-item(cdr lst))) 
+)))
 
+;; Signature: rotate-nth(lst , n) 
+;; Type: (List(T) Number) -> List(T)
+;; Purpose: rotate the list n times to right
+;; Pre-conditions: true
+;; Tests: (rotate-nth('(1 4 9 8), 2)) -> '(9 8 1 4) 
 (define rotate-nth
     (lambda (lst n)
-    @todo
-))
+    (if(eq? lst '()) lst 
+        ( if(eq? n 0) 
+            lst 
+            (rotate-nth (cons (last-item lst ) (remove-last-item lst ))  (- n 1) )
+))))
