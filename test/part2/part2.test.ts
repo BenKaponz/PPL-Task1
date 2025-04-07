@@ -13,6 +13,25 @@ describe("Assignment 1 - Part 2", () => {
         });
 
         // Your tests here (optional)
+        it("should return 0 for a string with no vowels", () => {
+            expect(countVowels("rhythm")).toBe(0);
+        });
+        
+        it("should count all vowels in a long sentence", () => {
+            expect(countVowels("The quick brown fox jumps over the lazy dog")).toBe(11);
+        });
+        
+        it("should ignore non-letter characters", () => {
+            expect(countVowels("123!@#aei")).toBe(3);
+        });
+        
+        it("should return 0 for an empty string", () => {
+            expect(countVowels("")).toBe(0);
+        });
+        
+        it("should handle repeated vowels", () => {
+            expect(countVowels("aaeeii")).toBe(6);
+        });
     });
 
     describe("isPalindrome", () => {
@@ -26,6 +45,26 @@ describe("Assignment 1 - Part 2", () => {
         });
 
         // Your tests here (optional)
+        it("should return false for a non-palindrome", () => {
+            expect(isPalindrome("hello")).toBe(false);
+        });
+        
+        it("should ignore case", () => {
+            expect(isPalindrome("MadAm")).toBe(true);
+        });
+        
+        it("should return true for a single letter", () => {
+            expect(isPalindrome("a")).toBe(true);
+        });
+        
+        it("should return true for an empty string", () => {
+            expect(isPalindrome("")).toBe(true); // לפעמים זה נחשב לפאלינדרום תקף
+        });
+        
+        it("should ignore spaces, punctuation, and capitalization", () => {
+            expect(isPalindrome("A man, a plan, a canal, Panama!")).toBe(true);
+        });
+        
     });
 
     describe("treeToSentence", () => {
@@ -60,6 +99,31 @@ describe("Assignment 1 - Part 2", () => {
         });
 
         // Your tests here (optional)
+        it("should handle nested children recursively", () => {
+            const tree: WordTree = {
+                root: "This",
+                children: [
+                    {
+                        root: "is",
+                        children: [
+                            {
+                                root: "a",
+                                children: [
+                                    {
+                                        root: "deep",
+                                        children: [
+                                            { root: "tree", children: [] }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            };
+        
+            expect(treeToSentence(tree)).toBe("This is a deep tree");
+        });
 
     });
 
