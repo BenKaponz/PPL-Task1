@@ -25,4 +25,9 @@ export type WordTree = {
     children: WordTree[];
 }
 
-export const treeToSentence: undefined = undefined;
+export const treeToSentence: (tree:WordTree) => string = R.pipe(
+    (tree:WordTree):string[] => [tree.root, ...R.map( (child:WordTree): string => treeToSentence(child), tree.children)],
+    (childArr: string[]): string => childArr.join(" ")
+);
+    
+
